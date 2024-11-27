@@ -1,0 +1,110 @@
+@use "sass:map";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+  font-family: "Roboto", serif;
+}
+
+$typography-map: (
+  "title-medium": (
+  "line-height": 24px,
+  "size": 16px,
+  "tracking": 0.15px,
+  "weight": 400
+  ),
+  "body-large": (
+  "line-height": 24px,
+  "size": 16px,
+  "tracking": 0.5px,
+  "weight": 400
+  ),
+  "body-medium": (
+  "line-height": 20px,
+  "size": 14px,
+  "tracking": 0.25px,
+  "weight": 400
+  ),
+);
+
+
+@mixin _private-apply-font($font-style) {
+    $font-map: map.get($typography-map, $font-style);
+  
+    font-size: map.get($font-map, "size");
+    line-height: map.get($font-map, "line-height");
+    letter-spacing:  map.get($font-map, "tracking");
+    font-weight:  map.get($font-map, "weight");
+}
+@mixin typography-title-medium {
+  @include _private-apply-font("title-medium");
+}
+@mixin typography-body-large {
+  @include _private-apply-font("body-large");
+}
+@mixin typography-body-medium {
+  @include _private-apply-font("body-medium");
+}
+  /*
+@mixin apply-font($line-height, $size, $tracking, $weight) {
+    font-size: $size;
+    line-height: $line-height;
+    letter-spacing:  $tracking;
+    font-weight:  $weight;
+}
+*/
+html, body {
+  margin: 0;
+  height: 100%;
+}
+body {
+  display: grid;
+  backgroung: var(--background-color);
+  color: var(--color);
+  place-items: center;
+}
+.list-container { 
+  padding-block: 8px;
+  border-radius: 4px;
+  width: 600px;
+  background: lightgreen;
+  display: grid;
+}
+.list-item {
+  display: grid;
+  grid-template-columns: [avatar-start] min-content [avatar-end content-start] 1fr [content-end];
+  grid-template-rows: [avatar-start headline-start] min-content [headline-end supporting-text-start] min-content [avatar-end supporting-text-end];
+  box-sizing: border-box;
+  height: 72px;
+  padding-block: 8px;
+  padding-inline: 16px;
+  column-gap: 16px;
+  
+  &__avatar {
+    @include typography-title-medium;
+    
+    grid-column: avatar;
+    grid-row: avatar;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    aspect-ratio: 1;
+    background: green;
+    border-radius: 20px;
+
+  }
+  &__headline {
+    @include typography-body-large;
+    
+    grid-column: content;
+    grid-row: headline;
+    margin: 0;
+    align-self: end; //?
+    
+  }
+  &__supporting-text {
+    @include typography-body-medium;
+    grid-column: content;
+    grid-row: supporting-text;
+    margin: 0;
+  }
+}
