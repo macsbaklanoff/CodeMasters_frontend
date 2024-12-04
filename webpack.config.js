@@ -2,6 +2,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { sourceMapsEnabled } = require('process');
+const { SourceMap } = require('module');
 
 module.exports = {
     entry: path.join(__dirname, 'src', 'index.js'),
@@ -25,6 +27,7 @@ module.exports = {
                     'sass-loader',
                 ],
             },
+            
         ],
     },
     plugins: [
