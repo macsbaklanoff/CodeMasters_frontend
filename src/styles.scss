@@ -1,6 +1,6 @@
+@use "sass:map";
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
 
 .material-symbols-outlined {
   font-variation-settings:
@@ -10,7 +10,7 @@
     'opsz' 24
 }
 
-/*$typography-map: (
+$typography-map: (
   "headline":(
     "font-size": 14px,
     "font-weight": 500,
@@ -33,7 +33,25 @@
     "color": var(--md-sys-color-badge-label-text)
   ),
 );
-*/
+
+@mixin _private-apply-text-style($font-style) {
+  $font-map: map.get($typography-map, $font-style);
+  font-size: map.get($font-map, "font-size");
+  font-weight: map.get($font-map, "font-weight");
+  line-height: map.get($font-map, "line-height");
+  font-tracking: map.get($font-map, "font-tracking");
+  color: map.get($font-map, "color");
+}
+@mixin typography-headline-style {
+  @include _private-apply-text-style("headline");
+}
+@mixin typography-label-style {
+  @include _private-apply-text-style("label-text");
+}
+@mixin typography-badge-style {
+  @include _private-apply-text-style("badge-text");
+}
+
 html,
 body {
   margin: 0;
@@ -119,6 +137,7 @@ body {
       &__text {
         padding-block: 18px;
         padding-inline: 16px;
+        @include typography-headline-style;
       }
     }
 
@@ -142,7 +161,7 @@ body {
         position: absolute;
         inset: 0;
         background-color: #4A4458;
-        opacity: .08;
+        opacity: .18;
         z-index: -1;
         border-radius: 26px;
       }
@@ -153,10 +172,12 @@ body {
 
         &__text {
           margin-top: 3px;
+          @include typography-label-style;
         }
       }
       &__right-number {
         display: var(--display-on-or-off-a-number);
+        @include typography-badge-style;
       }
     }
   }
