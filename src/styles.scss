@@ -183,4 +183,8 @@ body {
   background-color: var(--md-sys-color-active-indicator);
   --display-on-or-off-a-number: flex;
   border-radius: 28px;
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 1,
+  }
 }
