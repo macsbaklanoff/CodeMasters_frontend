@@ -11,27 +11,21 @@
 }
 
 $typography-map: (
-  "headline":(
-    "font-size": 14px,
+  "headline":("font-size": 14px,
     "font-weight": 500,
     "line-height": 20px,
     "font-tracking": 0.1px,
-    "color": var(--md-sys-headline-color)
-  ),
-   "label-text":(
-    "font-size": 14px,
+    "color": var(--md-sys-headline-color)),
+  "label-text":("font-size": 14px,
     "font-weight": 500,
     "line-height": 20px,
     "font-tracking": 0.1px,
-    "color": var(--md-sys-label-text-color)
-  ),
-    "badge-text":(
-    "font-size": 14px,
+    "color": var(--md-sys-label-text-color)),
+  "badge-text":("font-size": 14px,
     "font-weight": 500,
     "line-height": 20px,
     "font-tracking": 0.1px,
-    "color": var(--md-sys-color-badge-label-text)
-  ),
+    "color": var(--md-sys-color-badge-label-text)),
 );
 
 @mixin _private-apply-text-style($font-style) {
@@ -42,12 +36,15 @@ $typography-map: (
   font-tracking: map.get($font-map, "font-tracking");
   color: map.get($font-map, "color");
 }
+
 @mixin typography-headline-style {
   @include _private-apply-text-style("headline");
 }
+
 @mixin typography-label-style {
   @include _private-apply-text-style("label-text");
 }
+
 @mixin typography-badge-style {
   @include _private-apply-text-style("badge-text");
 }
@@ -57,7 +54,6 @@ body {
   margin: 0;
   width: 100dvw;
   height: 100dvh;
-  //background-color: #F7F2FA;
   background-color: var(--md-sys-color-scrim);
 }
 
@@ -116,14 +112,12 @@ body {
   justify-content: center;
   padding-block: 12px;
   background-color: var(--md-sys-color-navigation-driver);
+
   &__main {
     display: grid;
     grid-template-columns: minmax(50px, 1fr);
-    .active {
-      background-color: var(--md-sys-color-active-indicator);
-      --display-on-or-off-a-number: flex;
-      border-radius: 28px;
-    }
+
+
     &__item-headline {
       display: grid;
       grid-template-columns: minmax(50px, 1fr);
@@ -132,7 +126,6 @@ body {
 
       grid-template-rows: auto;
       height: 56px;
-      //background-color: azure;
 
       &__text {
         padding-block: 18px;
@@ -140,6 +133,7 @@ body {
         @include typography-headline-style;
       }
     }
+
 
     &__item-main {
       --_state_layer-display: none;
@@ -151,6 +145,7 @@ body {
       position: relative;
       isolation: isolate;
       color: var(--md-sys-label-text-color);
+
       &:hover {
         --_state_layer-display: block;
       }
@@ -166,7 +161,7 @@ body {
         border-radius: 26px;
       }
 
-      &__left {  
+      &__left {
         display: flex;
         gap: 12px;
 
@@ -175,10 +170,17 @@ body {
           @include typography-label-style;
         }
       }
+
       &__right-number {
         display: var(--display-on-or-off-a-number);
         @include typography-badge-style;
       }
     }
   }
+}
+
+.item-active {
+  background-color: var(--md-sys-color-active-indicator);
+  --display-on-or-off-a-number: flex;
+  border-radius: 28px;
 }
