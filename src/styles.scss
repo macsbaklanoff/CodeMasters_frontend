@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 $breakpoint-tablet: 840px;
+$breakpoint-phone: 412px;
 
 .material-symbols-outlined {
   font-variation-settings:
@@ -311,6 +312,18 @@ body {
   }
 }
 
+.navigation-bar {
+  display: none;
+  grid-template-columns: subgrid;
+  height: 80px;
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+
+
+
+
+
 @media (width <=#{$breakpoint-tablet}) {
   .navigation-driver {
     display: none;
@@ -322,5 +335,21 @@ body {
 
   .app {
     grid-template-columns: minmax(50px, 80px);
+  }
+}
+@media (width <=#{$breakpoint-phone}) {
+  .navigation-driver {
+    display: none;
+  }
+
+  .navigation-rail {
+    display: none;
+  }
+  .navigation-bar {
+    display: grid;
+  }
+
+  .app {
+    grid-template-columns: minmax(50px, 412px);
   }
 }
