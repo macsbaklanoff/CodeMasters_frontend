@@ -30,3 +30,18 @@ blocks_nav_rail.forEach(block => {
         activeBlock_nav_rail = block
     });
 });
+
+const blocks_nav_bar = document.querySelectorAll(".navigation-bar__item")
+let activeBlock_nav_bar = null
+activeBlock_nav_bar = blocks_nav_bar[0]
+activeBlock_nav_bar.classList.add('item-active-nav-bar')
+
+blocks_nav_bar.forEach(block => {
+    block.addEventListener('click', () => {
+        if (activeBlock_nav_bar) {
+            activeBlock_nav_bar.classList.remove('item-active-nav-bar')
+        }
+        block.classList.add('item-active-nav-bar')
+        activeBlock_nav_bar = block
+    });
+});

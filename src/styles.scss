@@ -4,6 +4,7 @@
 
 $breakpoint-tablet: 840px;
 $breakpoint-phone: 412px;
+$breakpoint-small: 188px;
 
 .material-symbols-outlined {
   font-variation-settings:
@@ -39,6 +40,11 @@ $typography-map: (
     "line-height": 16px,
     "font-tracking": .5px,
     "color": var(--md-sys-color-on-secondary-container)),
+  "label-text-nav-bar":("font-size": 12px,
+    "font-weight": 500,
+    "line-height": 16px,
+    "font-tracking": .5px,
+    "color": var(--md-sys-color-on-surface-variant)),
 );
 
 @mixin _private-apply-text-style($font-style) {
@@ -64,6 +70,10 @@ $typography-map: (
 
 @mixin typography-label-style-rail {
   @include _private-apply-text-style("label-text-nav-rail");
+}
+
+@mixin typography-label-style-bar {
+  @include _private-apply-text-style("label-text-nav-bar");
 }
 
 html,
@@ -301,6 +311,7 @@ body {
       border-radius: 16px;
       color: var(--md-sys-color-on-secondary-container);
     }
+
     &__text {
       color: var(--md-sys-color-on-surface);
     }
@@ -314,15 +325,52 @@ body {
 
 .navigation-bar {
   display: none;
-  grid-template-columns: subgrid;
+  grid-template-columns: repeat(3, 1fr);
   height: 80px;
   background-color: var(--md-sys-color-surface-container-low);
+  padding-inline: 8px;
+  column-gap: 8px;
+  place-items: center;
+
+  &__item {
+    display: grid;
+    grid-template-columns: minmax(50px, 126px);
+    grid-auto-rows: min-content;
+    place-items: center;
+    height: auto;
+    row-gap: 4px;
+
+    &__icon {
+      display: grid;
+      width: 64px;
+      height: 32px;
+      place-items: center;
+    }
+
+    &__text {
+      @include typography-label-style-bar;
+    }
+  }
 }
 
+.item-active-nav-bar {
+  .navigation-bar__item {
+    &__icon {
+      background-color: var(--md-sys-color-secondary-container);
+      border-radius: 16px;
+      color: var(--md-sys-color-on-secondary-container);
+    }
 
+    &__text {
+      color: var(--md-sys-color-on-surface);
+    }
+  }
 
-
-
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 1,
+  }
+}
 
 @media (width <=#{$breakpoint-tablet}) {
   .navigation-driver {
@@ -337,6 +385,7 @@ body {
     grid-template-columns: minmax(50px, 80px);
   }
 }
+
 @media (width <=#{$breakpoint-phone}) {
   .navigation-driver {
     display: none;
@@ -345,6 +394,7 @@ body {
   .navigation-rail {
     display: none;
   }
+
   .navigation-bar {
     display: grid;
   }
